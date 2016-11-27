@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -29,9 +30,14 @@ module.exports = {
         ]
     },
 
+    devServer: {
+        outputPath: __dirname + '/dist'
+    },
+
     plugins: [
         new CleanWebpackPlugin(['./dist']),
         new HtmlWebpackPlugin({ template: 'index.html' }),
-        new ExtractTextPlugin('styles.css')
+        new ExtractTextPlugin('styles.css'),
+        new CopyWebpackPlugin([ { from: __dirname + '/feed/sample.json', to: __dirname + '/dist/feed' } ])
     ]
 };
