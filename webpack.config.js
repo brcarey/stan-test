@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -19,7 +20,8 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.tsx?$/, loader: 'ts-loader',  exclude: /node_modules/ }
+            { test: /\.tsx?$/, loader: 'ts-loader',  exclude: /node_modules/ },
+            { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'less-loader') }
         ],
 
         preLoaders: [
@@ -29,6 +31,7 @@ module.exports = {
 
     plugins: [
         new CleanWebpackPlugin(['./dist']),
-        new HtmlWebpackPlugin({ template: 'index.html' })
+        new HtmlWebpackPlugin({ template: 'index.html' }),
+        new ExtractTextPlugin('styles.css')
     ]
 };
