@@ -1,8 +1,4 @@
 import * as React from 'react';
+import {Entries} from './entries';
 
-export class Movies extends React.Component<{}, {}> {
-
-    render(): JSX.Element {
-        return <h2>MOVIES</h2>;
-    }
-}
+export const Movies = (props:any) => <Entries type={'movie'} />;
