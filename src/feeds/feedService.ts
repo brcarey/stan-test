@@ -1,25 +1,33 @@
 import * as Rx from 'rxjs';
 import {Item} from './item';
-import {hashHistory} from 'react-router';
 
 export class FeedService {
     
     constructor(private feedUrl: string) {        
     }
 
-    fetchItems(type: 'series' | 'movie', skip = 0, take = 21): Rx.Observable<Item[]> {        
-        return Rx.Observable.fromPromise(fetch(this.feedUrl, {headers: {'Content-Type': 'application/json'}}))
-            .flatMap((response:Response) => {
-                if(response.status >= 400) {
-                    hashHistory.push('/error');    
-                    return null;
-                }
+    fetchItems(type: 'series' | 'movie', skip = 0, take = 21): Rx.Observable<{loading: boolean, items: Item[]}> {
+        return Rx.Observable.create((obs:Rx.Observer<{loading: boolean, items: Item[]}>) => {
+            obs.next({loading: true, items: []});
 
-                return response.json();
-            })
-            .map((data:{entries:Item[], totalItems:number}) => {
-                let result = data.entries.filter(x => x.programType === type);
-                return result;
-            });
+            fetch(this.feedUrl, {headers: {'Content-Type': 'application/json'}})
+                .then((response:Response) => {
+                    
+                    if(response.status >= 400) {
+                        obs.error({status: response.status, statusText: response.statusText});    
+                        return;
+                    }
+
+                    response.json().then((data:{entries:Item[], totalItems:number}) => {
+                        let result = data.entries
+                            .filter(x => x.programType === type)
+                            .slice(skip, skip + take);
+                        
+                        obs.next({loading: false, items: result});
+                        obs.complete();
+                    });
+                })
+                .catch((error:any) => obs.error(error));
+        });
     }
 }
