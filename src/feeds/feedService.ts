@@ -20,7 +20,8 @@ export class FeedService {
 
                     response.json().then((data:{entries:Item[], totalItems:number}) => {
                         let result = data.entries
-                            .filter(x => x.programType === type)
+                            .filter(x => x.programType === type && x.releaseYear >= 2010)
+                            .sort((a:Item, b:Item) => a.title < b.title ? -1 : a.title > b.title ? 1 : 0)
                             .slice(skip, skip + take);
                         
                         obs.next({loading: false, items: result});
