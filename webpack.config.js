@@ -38,6 +38,9 @@ module.exports = {
         new CleanWebpackPlugin(['./dist']),
         new HtmlWebpackPlugin({ template: 'index.html' }),
         new ExtractTextPlugin('styles.css'),
-        new CopyWebpackPlugin([ { from: __dirname + '/feed/sample.json', to: __dirname + '/dist/feed' } ])
+        new CopyWebpackPlugin([ 
+            { from: __dirname + '/feed/sample.json', to: __dirname + '/dist/feed' }, 
+            { from: __dirname + '/assets', to: __dirname + '/dist/assets' } 
+        ])
     ]
 };
