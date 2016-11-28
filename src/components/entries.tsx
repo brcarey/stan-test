@@ -63,7 +63,15 @@ export class Entries extends React.Component<EntriesProps, EntriesState> {
         }
 
         const tiles = this.state.items.map((x:Item, index:number) => {
-            return <div className="col" key={index}>{x.title}</div>
+            const image = x.images['Poster Art'];
+            return (
+                <div className="col" key={index}>
+                    <div className="tile">
+                        <img src={image.url} />
+                        <h4>{x.title}</h4>
+                    </div>
+                </div>
+            );
         });
 
         return <div className="flex-grid">{tiles}</div>;

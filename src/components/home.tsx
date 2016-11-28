@@ -5,14 +5,20 @@ export const Home = (props:any) => {
     return (
         <div className="flex-grid">
             <div className="col">
-                <Link to="/series">
-                    Series
-                </Link>
+                <div className="tile">
+                    <Link to="/series">
+                        <h3>Series</h3>
+                        <p>Popular series</p>
+                    </Link>
+                </div>
             </div> 
             <div className="col">
-                <Link to="/movies">
-                    Movies
-                </Link>
+                <div className="tile">
+                    <Link to="/movies">                    
+                        <h3>Movies</h3>
+                        <p>Popular movies</p>     
+                    </Link>
+                </div>
             </div> 
         </div>);
 };
