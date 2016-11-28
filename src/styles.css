@@ -34,15 +34,6 @@ h1, h2 {
     color: #fff;
 }
 
-.flex-grid {
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.flex-grid .col {
-    flex: 1;
-}
-
 .tile {
     padding: 12px;
     width: 200px;
@@ -59,6 +50,15 @@ h1, h2 {
 .tile img {
     width:80%;
     height: auto;
+}
+
+.flex-grid {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-grid .col {
+    flex: 1;
 }
 
 @media (max-width: 400px) {
