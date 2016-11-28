@@ -22,7 +22,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.tsx?$/, loader: 'ts-loader',  exclude: /node_modules/ },
-            { test: /\.css$/, loader: ExtractTextPlugin.extract(['style', 'css']) }
+            { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader') }
         ],
 
         preLoaders: [

@@ -7,7 +7,7 @@ import {Series} from './components/series';
 import {Movies} from './components/movies';
 import {Error} from './components/error';
 import {Layout} from './layout/layout';
-import './styles.less';
+import './styles.css';
 
 ReactDOM.render((
     <Router history={hashHistory}>
